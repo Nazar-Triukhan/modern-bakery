@@ -1,0 +1,69 @@
+.traditions {
+  padding-top: 40px;
+
+  &__box{
+    display: flex;
+    gap: 104px;
+  }
+  &__title {
+    font-weight: 900;
+    font-size: 32px;
+    color: var(--bakery-landing-1-s1);
+    // width: 320px;
+    margin-bottom: 24px;
+    @media screen and (min-width: 798px){
+  margin-bottom: 34px;
+  font-size: 45px;
+}
+@media screen and (min-width: 1270px){
+  font-size: 64px;
+  width: 710px;
+}
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    @media screen and (min-width: 798px){
+  gap: 32px;
+}
+
+
+  }
+
+  &__text {
+    font-weight: 300;
+    color: $--bakery-landing-1-s1;
+    font-size: 16px;
+    @media screen and (min-width: 798px){
+//   width: 798px;
+  font-size: 18px;
+}
+  }
+
+  &__subtext {
+    font-weight: 600;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: $--bakery-landing-1-c2;
+  }
+
+  &__lower {
+    text-transform: lowercase;
+  }
+
+  &__img {
+    display: none;
+    @media screen and (min-width: 798px) {
+      display: block;
+      width: 400px;
+height: 366px;
+      border-radius: 200px 200px 0 0;
+    }
+    @media screen and (min-width: 1270px){
+ width: 393px;
+height: 466px;
+}
+  }
+}
