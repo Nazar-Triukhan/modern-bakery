@@ -1,5 +1,33 @@
+body {
+  font-family: "Poppins", sans-serif;
+    margin: 0;
+  padding: 0;
+  color: $--bakery-landing-1-s1;
+  background-color:    $--bakery-landing-1-background;
 
-    body{
-    font-family: 'Poppins';
-    }
+}
+
+// *,
+// *::before,
+// *::after {
+//   box-sizing: border-box;
+// }
+
+.hero__wrap {
+  // min-height: 100vh;
+
+  background:
+    linear-gradient(
+      102.76deg,
+      rgba(18, 18, 17, 0.78) 2.03%,
+      rgba(18, 18, 17, 0.6) 58.46%,
+      rgba(18, 18, 17, 0) 90.36%
+    ),
+    url("/images/peeple.jpg") 70% top / cover no-repeat;
+    background-color: black;
+
+  display: flex;
+  flex-direction: column;
+}
+
 

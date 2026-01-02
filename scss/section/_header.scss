@@ -1,0 +1,58 @@
+.header {
+  padding-top: 2rem;
+  &__box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__items {
+    display: none;
+    gap: 64px;
+    @media screen and (min-width: 798px) {
+      display: flex;
+    }
+  }
+
+  &__link {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: undefined;
+    letter-spacing: 0em;
+    text-align: center;
+    color: $--bakery-landing-1-background;
+    transition: color 0.5s ease;
+
+    &:hover {
+      color: $--bakery-landing-1-c2;
+    }
+  }
+
+  &__button {
+    font-weight: 700;
+    font-size: 13px;
+    background-color: $--bakery-landing-1-c2;
+    border: 0.15rem solid $--bakery-landing-1-c2;
+    padding: 1rem 2rem;
+    color: $--bakery-landing-1-background;
+    display: none;
+    border-radius: 8px;
+    transition: background-color 0.5s ease, color 0.5s ease;
+
+    &:hover {
+      background-color: transparent;
+      color: $--bakery-landing-1-s3;
+    }
+    @media screen and (min-width: 1270px) {
+      display: flex;
+    }
+  }
+  &__burger {
+    width: 20px;
+    height: 14px;
+    fill: $--bakery-landing-1-background;
+    @media screen and (min-width: 798px) {
+      display: none;
+    }
+  }
+}

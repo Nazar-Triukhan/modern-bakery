@@ -5,37 +5,54 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Сучасна пекарня</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./style/main.min.css">
   </head>
   <body>
-    <header>
-      <a href="/">  
+    <div class="hero__wrap">
+    <header class="header">
+      <div class="container header__box">
+      <a class="header__logo" href="/">  
         <img src="./images/logo.svg" alt="">
       </a>
       <nav>
-        <ul>
-          <li><a href="#traditions-section">Наші традиції</a></li>
-          <li><a href="#ches-section">Шеф-кухарі</a></li>
-          <li><a href="#format-section">Формати</a></li>
-          <li><a href="#contact-section">Контакти</a></li>
+        <ul class="header__items">
+          <li class="header__item"><a class="header__link" href="#traditions-section">Наші традиції</a></li>
+          <li class="header__item"><a class="header__link" href="#ches-section">Шеф-кухарі</a></li>
+          <li class="header__item"><a class="header__link" href="#format-section">Формати</a></li>
+          <li class="header__item"><a class="header__link" href="#contact-section">Контакти</a></li>
         </ul>
       </nav>
-      <button type="button">Замовити дзвінок</button>
+      <button class="header__button" type="submit">Замовити дзвінок</button>
+      <svg class="header__burger">
+        <use href="./images/symbol-defs.svg#icon-menu"></use>
+      </svg>
+      </div>
     </header>
 
+
+      <section class="hero">
+        <div class="container">
+        <h1 class="hero__title"><span class="hero__brend">Сучасна</span> <span class="hero__pakary">пекарня</span></h1>
+        <button class="hero__button" type="submit">Замовити дзвінок</button>
+        </div>
+      </section> 
+      </div>
     <main>
-      <section>
-        <h1>Сучасна пекарня</h1>
-      </section>
-
-      <section>
-        <ul>
-          <li>Великий попит на ринку</li>
-          <li>Доступні за бюджетом формати</li>
-          <li>Досвідчена управлінська команда</li>
+      <section class="about">
+        <div class="container">
+        <ul class="about__items">
+          <li class="about__item"><p class="about__text">Великий попит на ринку</p></li>
+          <li class="about__item"><p class="about__text">Доступні за бюджетом формати</p></li>
+          <li class="about__item"><p class="about__text">Досвідчена управлінська команда</p></li>
         </ul>
+        </div>
       </section>
 
-      <section id="traditions-section">
+      <!-- <section id="traditions-section">
         <h2>Новий формат традицій</h2>
         <p>
           <span>shop bakery</span> — це пекарня, яка взяла все найкраще, і
@@ -47,9 +64,9 @@
           стильний дизайн та висока якість обслуговування!
         </p>
         <img src="" alt="пекар який біля хлібу" />
-      </section>
+      </section> -->
 
-      <section id="ches-section">
+      <!-- <section id="ches-section">
         <h2>Наші найкращі шеф -кухарі</h2>
         <ul>
           <li>
@@ -73,9 +90,9 @@
             </article>
           </li>
         </ul>
-      </section>
+      </section> -->
 
-      <section id="format-section">
+      <!-- <section id="format-section">
         <h2>Формати</h2>
         <ul>
           <li>
@@ -94,9 +111,9 @@
             </article>
           </li>
         </ul>
-      </section>
+      </section> -->
 
-      <section id="contact-section">
+      <!-- <section id="contact-section">
         <h2>Приєднуйся до мережі пекарень</h2>
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2540.1636289098733!2d30.4912733!3d50.4566776!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4ce637c006b2d%3A0xaf86385f19996ff0!2z0YPQuy4g0KHQtdGH0LXQstGL0YUg0KHRgtGA0LXQu9GM0YbQvtCyLCA1NCwg0JrQuNC10LIsIDAyMDAw!5e0!3m2!1sru!2sua!4v1765487394302!5m2!1sru!2sua"
@@ -106,9 +123,9 @@
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
         ></iframe>
-      </section>
+      </section> -->
     </main>
-
+<!-- 
     <footer>
       <a href="#"></a>
       <nav>
@@ -136,6 +153,6 @@
         <a href="#" target="_blank">Політика конфіденційності</a>
         <p>© 2022 Дані захищені</p>
       </address>
-    </footer>
+    </footer> -->
   </body>
 </html>
