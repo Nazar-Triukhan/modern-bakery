@@ -227,6 +227,11 @@ body {
 .traditions {
   padding-top: 40px;
 }
+@media screen and (min-width: 1270px) {
+  .traditions {
+    padding-top: 96px;
+  }
+}
 .traditions__box {
   display: flex;
   gap: 104px;
@@ -257,6 +262,17 @@ body {
 @media screen and (min-width: 798px) {
   .traditions__list {
     gap: 32px;
+  }
+}
+@media screen and (min-width: 1270px) {
+  .traditions__list .traditions__item {
+    line-height: 1.5;
+  }
+  .traditions__list .traditions__item:nth-child(1) .traditions__tetx {
+    width: 500px;
+  }
+  .traditions__list .traditions__item:nth-child(2) .traditions__tetx {
+    width: 300px;
   }
 }
 .traditions__text {
