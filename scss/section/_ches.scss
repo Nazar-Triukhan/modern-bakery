@@ -1,5 +1,8 @@
 .ches{
     &__image{
         border-radius: 0 0 0 200px;
+        box-shadow: -8px 8px 0 0 $--bakery-landing-1-background,
+            -8px 8px 0 2px $--bakery-landing-1-c2;
+
     }
 }

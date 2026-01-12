@@ -52,7 +52,7 @@ body {
 }
 
 .hero__wrap {
-  background: linear-gradient(102.76deg, rgba(18, 18, 17, 0.78) 2.03%, rgba(18, 18, 17, 0.6) 58.46%, rgba(18, 18, 17, 0) 90.36%), url("/images/peeple.jpg") 70% top/cover no-repeat;
+  background: linear-gradient(102.76deg, rgba(18, 18, 17, 0.78) 2.03%, rgba(18, 18, 17, 0.6) 58.46%, rgba(18, 18, 17, 0) 90.36%), url("./images/peeple.jpg") 70% top/cover no-repeat;
   display: flex;
   flex-direction: column;
 }
@@ -313,4 +313,5 @@ body {
 
 .ches__image {
   border-radius: 0 0 0 200px;
+  box-shadow: -8px 8px 0 0 #FAF4EA, -8px 8px 0 2px #819B57;
 }/*# sourceMappingURL=main.css.map */
