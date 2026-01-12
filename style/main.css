@@ -309,4 +309,8 @@ body {
     width: 393px;
     height: 466px;
   }
+}
+
+.ches__image {
+  border-radius: 0 0 0 200px;
 }/*# sourceMappingURL=main.css.map */
