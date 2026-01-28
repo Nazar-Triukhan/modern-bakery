@@ -27,21 +27,6 @@ img {
   outline: 1px solid red;
   box-sizing: border-box;
 }
-@media screen and (min-width: 510px) {
-  .container {
-    width: 510px;
-  }
-}
-@media screen and (min-width: 798px) {
-  .container {
-    width: 798px;
-  }
-}
-@media screen and (min-width: 1270px) {
-  .container {
-    width: 1270px;
-  }
-}
 
 body {
   font-family: "Poppins", sans-serif;
@@ -51,14 +36,12 @@ body {
   background-color: #FAF4EA;
 }
 
-.hero__wrap {
-  background: linear-gradient(102.76deg, rgba(18, 18, 17, 0.78) 2.03%, rgba(18, 18, 17, 0.6) 58.46%, rgba(18, 18, 17, 0) 90.36%), url("../../images/peeple.jpg") 70% top/cover no-repeat;
-  display: flex;
-  flex-direction: column;
-}
-
 .header {
   padding-top: 2rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 .header__box {
   display: flex;
@@ -118,35 +101,26 @@ body {
 }
 
 .hero {
-  padding: 68px 0 32px 0;
+  padding: 100px 0 90px 0;
   display: flex;
   align-items: center;
+  background: linear-gradient(102.76deg, rgba(18, 18, 17, 0.78) 2.03%, rgba(18, 18, 17, 0.6) 58.46%, rgba(18, 18, 17, 0) 90.36%), url("../../images/peeple.jpg") 70% top/cover no-repeat;
 }
 @media screen and (min-width: 798px) {
   .hero {
-    padding: 120px 0 140px 0;
+    padding: 150px 0 140px 0;
   }
 }
 @media screen and (min-width: 1270px) {
   .hero {
-    padding: 200px 0 300px 0;
+    padding: 230px 0 300px 0;
   }
 }
 .hero__title {
   text-align: center;
-  font-size: 67px;
+  font-size: clamp(67px, 8vw, 110px);
   line-height: 1;
   font-weight: 900;
-}
-@media screen and (min-width: 798px) {
-  .hero__title {
-    font-size: 80px;
-  }
-}
-@media screen and (min-width: 1270px) {
-  .hero__title {
-    font-size: 110px;
-  }
 }
 .hero__brend {
   color: #819b57;

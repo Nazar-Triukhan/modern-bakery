@@ -1,27 +1,38 @@
 .hero {
-    padding: 68px 0 32px 0;
+    padding: 100px 0 90px 0;
   display: flex;
   align-items: center;
+  background:
+    linear-gradient(
+      102.76deg,
+      rgba(18, 18, 17, 0.78) 2.03%,
+      rgba(18, 18, 17, 0.6) 58.46%,
+      rgba(18, 18, 17, 0) 90.36%
+    ),
+    url("../../images/peeple.jpg")
+ 70% top / cover no-repeat;
   @media screen and (min-width: 798px){
-  padding: 120px 0 140px 0;
+  padding: 150px 0 140px 0;
 }
   @media screen and (min-width: 1270px){
-  padding: 200px 0 300px 0;
+  padding: 230px 0 300px 0;
 }
 
   &__title {
     text-align: center;
-    font-size: 67px;
+    // display: block;
+    font-size: clamp(67px,8vw,110px);
+    // font-size: 67px;
     line-height: 1;
     font-weight: 900;
 
-@media screen and (min-width: 798px){
-    font-size: 80px;
-}
+// @media screen and (min-width: 798px){
+//     font-size: 80px;
+// }
 
-@media screen and (min-width: 1270px){
-    font-size: 110px;
-}
+// @media screen and (min-width: 1270px){
+//     font-size: 110px;
+// }
   }
 
   &__brend{
