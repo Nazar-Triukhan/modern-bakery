@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лекція: Історія розвитку операційних систем</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=IBM+Plex+Sans:wght@300;400;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #0f3460;
+            --highlight: #e94560;
+            --light: #f1f6f9;
+            --code: #533483;
+            --success: #38b000;
+            --warning: #ff6b6b;
+            --info: #4ecdc4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'IBM Plex Sans', sans-serif;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+            color: var(--light);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header with animation */
+        header {
+            text-align: center;
+            padding: 80px 20px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(233, 69, 96, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+            color: var(--highlight);
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 1;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: var(--info);
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Section styling */
+        section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeIn 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+
+        section:nth-child(odd) {
+            animation-delay: 0.1s;
+        }
+
+        section:nth-child(even) {
+            animation-delay: 0.2s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(233, 69, 96, 0.3);
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--highlight);
+            margin-bottom: 25px;
+            border-bottom: 3px solid var(--info);
+            padding-bottom: 15px;
+            position: relative;
+        }
+
+        h2::before {
+            content: '◆';
+            color: var(--info);
+            margin-right: 15px;
+            font-size: 1.5rem;
+        }
+
+        h3 {
+            font-size: 1.6rem;
+            color: var(--info);
+            margin: 30px 0 20px 0;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+            font-size: 1.05rem;
+        }
+
+        /* Definition box */
+        .definition {
+            background: linear-gradient(135deg, rgba(233, 69, 96, 0.2) 0%, rgba(78, 205, 196, 0.2) 100%);
+            border-left: 5px solid var(--highlight);
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            position: relative;
+        }
+
+        .definition::before {
+            content: '💡';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+        }
+
+        /* Lists */
+        ul {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        ul li {
+            padding: 12px 0;
+            padding-left: 40px;
+            position: relative;
+            transition: transform 0.2s ease;
+        }
+
+        ul li:hover {
+            transform: translateX(10px);
+        }
+
+        ul li::before {
+            content: '▸';
+            color: var(--highlight);
+            font-size: 1.3rem;
+            position: absolute;
+            left: 10px;
+            top: 12px;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+            margin: 30px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--highlight), var(--info));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            background: rgba(233, 69, 96, 0.15);
+            transform: translateX(10px);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -48px;
+            top: 20px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--highlight);
+            border: 3px solid var(--primary);
+        }
+
+        .timeline-year {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--info);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 30px 0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        thead {
+            background: linear-gradient(135deg, var(--highlight) 0%, var(--code) 100%);
+        }
+
+        th {
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        td {
+            padding: 18px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        tbody tr:hover td {
+            background: rgba(233, 69, 96, 0.1);
+        }
+
+        /* Info box */
+        .info-box {
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.15) 0%, rgba(15, 52, 96, 0.15) 100%);
+            border: 2px solid var(--info);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .info-box h4 {
+            color: var(--info);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        /* Code block */
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(83, 52, 131, 0.3);
+            padding: 3px 8px;
+            border-radius: 5px;
+            color: #ffd700;
+            font-size: 0.95rem;
+        }
+
+        /* Homework section */
+        .homework {
+            background: linear-gradient(135deg, rgba(15, 52, 96, 0.3) 0%, rgba(22, 33, 62, 0.3) 100%);
+            border: 3px solid var(--highlight);
+            padding: 40px;
+            border-radius: 20px;
+            margin-top: 50px;
+        }
+
+        .homework h2 {
+            color: var(--highlight);
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .level {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-left: 5px solid;
+            transition: all 0.3s ease;
+        }
+
+        .level:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .level-basic {
+            border-left-color: var(--success);
+        }
+
+        .level-medium {
+            border-left-color: var(--warning);
+        }
+
+        .level-advanced {
+            border-left-color: var(--highlight);
+        }
+
+        .level-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .level-title {
+            font-size: 1.6rem;
+            font-weight: 600;
+        }
+
+        .level-basic .level-title {
+            color: var(--success);
+        }
+
+        .level-medium .level-title {
+            color: var(--warning);
+        }
+
+        .level-advanced .level-title {
+            color: var(--highlight);
+        }
+
+        .points {
+            background: rgba(233, 69, 96, 0.3);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .task {
+            margin: 15px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .task::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--info);
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        /* Grading section */
+        .grading {
+            background: linear-gradient(135deg, rgba(233, 69, 96, 0.2) 0%, rgba(83, 52, 131, 0.2) 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+
+        .grading h3 {
+            text-align: center;
+            color: var(--highlight);
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+        }
+
+        .grade-scale {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .grade-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .grade-item:hover {
+            transform: scale(1.05);
+            border-color: var(--highlight);
+        }
+
+        .grade-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--highlight);
+            margin-bottom: 10px;
+        }
+
+        .grade-desc {
+            font-size: 0.95rem;
+            color: var(--info);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            margin-top: 60px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            font-size: 0.95rem;
+        }
+
+        .highlight-text {
+            color: var(--highlight);
+            font-weight: 600;
+        }
+
+        /* Animation for scroll */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            section {
+                padding: 25px;
+            }
+
+            .homework {
+                padding: 25px;
+            }
+
+            .grade-scale {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+
+            section {
+                page-break-inside: avoid;
+                border: 1px solid #ccc;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Історія розвитку операційних систем</h1>
+            <p class="subtitle">Класифікація та основні функції ОС</p>
+            <p style="margin-top: 15px; font-size: 1rem; opacity: 0.8;">Лекція для здобувачів освіти 2 курсу коледжу</p>
+        </header>
+
+        <!-- Вступ -->
+        <section class="fade-in-section">
+            <h2>Що таке операційна система?</h2>
+            <div class="definition">
+                <strong>Операційна система (ОС)</strong> — це комплекс програмного забезпечення, що виконує управління апаратним забезпеченням комп'ютера або віртуальної машини, забезпечує керування обчислювальним процесом і організовує взаємодію з користувачем.
+            </div>
+            <p>
+                Операційна система є найважливішою складовою будь-якого комп'ютера, яка виступає посередником між апаратним забезпеченням та прикладними програмами. Без ОС комп'ютер перетворюється на набір електронних компонентів, які не можуть виконувати корисну роботу.
+            </p>
+            <div class="info-box">
+                <h4>🎯 Основні задачі ОС:</h4>
+                <ul>
+                    <li>Контроль працездатності обладнання ПК</li>
+                    <li>Виконання процедури початкового завантаження</li>
+                    <li>Керування роботою всіх пристроїв ПК</li>
+                    <li>Керування файловою системою</li>
+                    <li>Взаємодія користувача із ПК</li>
+                    <li>Завантаження й виконання прикладних програм</li>
+                    <li>Розподіл ресурсів ПК між прикладними програмами</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Історія розвитку -->
+        <section class="fade-in-section">
+            <h2>Еволюція операційних систем</h2>
+            
+            <h3>📊 Розвиток по поколіннях ЕОМ</h3>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">1 покоління (1940-1955)</div>
+                    <p>ЕОМ першого покоління не мали операційних систем. Програмування здійснювалося безпосередньо у машинних кодах, а взаємодія з комп'ютером відбувалася через перемикачі та лампочки.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">2 покоління (1955-1965)</div>
+                    <p>Операційні системи почали розроблятися для ЕОМ 2 покоління, оскільки збільшувався об'єм інформації, який потрібно було обробляти за короткий проміжок часу. ЕОМ ширше почали використовувати для наукових і економічних розрахунків. Актуальною була задача створення програмних засобів для автоматизації роботи обслуговуючого персоналу.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">3 покоління (1965-1980)</div>
+                    <p>Перші повномасштабні ОС з'явилися в ЕОМ 3 покоління. Вони представляли собою повномасштабні пакети програм, які постійно знаходилися в оперативній пам'яті. Окрема частина ОС, яка постійно знаходиться в ОЗП, називається <strong>ядром системи</strong>. Інша частина зберігається на зовнішніх носіях і називається <strong>транзитною</strong>. Операційні системи працювали в мультипрограмному режимі.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">4 покоління (1980 - наш час)</div>
+                    <p>В ЕОМ 4 покоління, зокрема в ПК, основним завданням ОС є забезпечення виконання задач користувача. Операційні системи розділяються на три групи: найпростіші (однокористувацькі), інструментальні (з великою ОЗП) та багатокористувацькі багатозадачні системи.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Windows Timeline -->
+        <section class="fade-in-section">
+            <h2>Історія розвитку Microsoft Windows</h2>
+            <p>Microsoft Windows є однією з найпопулярніших операційних систем у світі. Розглянемо ключові етапи її еволюції:</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Рік</th>
+                        <th>Версія</th>
+                        <th>Особливості</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1985</td>
+                        <td>Windows 1.0</td>
+                        <td>Перша графічна оболонка для MS-DOS</td>
+                    </tr>
+                    <tr>
+                        <td>1987-1988</td>
+                        <td>Windows 2.0-2.1</td>
+                        <td>Покращений інтерфейс, підтримка вікон</td>
+                    </tr>
+                    <tr>
+                        <td>1990-1994</td>
+                        <td>Windows 3.0-3.2</td>
+                        <td>Масове поширення, підтримка мультимедіа</td>
+                    </tr>
+                    <tr>
+                        <td>1993-1995</td>
+                        <td>Windows NT 3.1-3.51</td>
+                        <td>Корпоративна система, 32-бітна архітектура</td>
+                    </tr>
+                    <tr>
+                        <td>1995</td>
+                        <td>Windows 95</td>
+                        <td>Революція в UI, кнопка "Пуск"</td>
+                    </tr>
+                    <tr>
+                        <td>1998</td>
+                        <td>Windows 98</td>
+                        <td>Інтеграція з інтернетом, USB підтримка</td>
+                    </tr>
+                    <tr>
+                        <td>2001</td>
+                        <td>Windows XP</td>
+                        <td>Стабільність, широке впровадження</td>
+                    </tr>
+                    <tr>
+                        <td>2009</td>
+                        <td>Windows 7</td>
+                        <td>Покращена продуктивність та інтерфейс</td>
+                    </tr>
+                    <tr>
+                        <td>2015</td>
+                        <td>Windows 10</td>
+                        <td>Універсальна платформа, безкоштовне оновлення</td>
+                    </tr>
+                    <tr>
+                        <td>2021</td>
+                        <td>Windows 11</td>
+                        <td>Новий дизайн, підтримка Android-додатків</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Функції ОС -->
+        <section class="fade-in-section">
+            <h2>Основні функції операційних систем</h2>
+            <p>Операційна система виконує численні функції, які можна згрупувати за такими категоріями:</p>
+
+            <div class="info-box">
+                <h4>🔧 Ключові функції ОС:</h4>
+                <ul>
+                    <li><strong>Управління пам'яттю та файловою системою</strong> — розподіл оперативної пам'яті, організація зберігання даних на дисках</li>
+                    <li><strong>Управління доступом до пристроїв введення-виведення</strong> — координація роботи клавіатури, миші, монітора, принтера тощо</li>
+                    <li><strong>Забезпечення інтерфейсу з користувачем</strong> — графічний або текстовий інтерфейс для взаємодії</li>
+                    <li><strong>Управління взаємодією процесів</strong> — диспетчеризація та синхронізація процесів</li>
+                    <li><strong>Управління використанням ресурсів</strong> — оптимальний розподіл процесорного часу, пам'яті</li>
+                    <li><strong>Завантаження програм</strong> — завантаження програм в оперативну пам'ять і їх виконання</li>
+                    <li><strong>Захист системи і даних</strong> — безпека даних користувача та програм</li>
+                    <li><strong>Розмежування прав доступу</strong> — багатокористувацький режим роботи</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Складові ОС -->
+        <section class="fade-in-section">
+            <h2>Основні складові операційних систем</h2>
+            
+            <h3>🏗️ Архітектурні компоненти</h3>
+
+            <div class="info-box">
+                <h4>1. BIOS (Basic Input/Output System)</h4>
+                <p><strong>Базова система введення/виведення</strong> — незалежний від конкретної версії ОС набір базових команд, які використовуються для забезпечення обміну даними між пристроями. BIOS ініціалізує апаратне забезпечення при завантаженні комп'ютера.</p>
+            </div>
+
+            <div class="info-box">
+                <h4>2. Ядро ОС (Kernel)</h4>
+                <p><strong>Ядро операційної системи</strong> — центральна частина ОС, що керує процесом виконання програм та їх доступом до ресурсів комп'ютера. Ядро є резидентною частиною системи, яка постійно знаходиться в оперативній пам'яті.</p>
+                <p><strong>Функції ядра:</strong></p>
+                <ul>
+                    <li>Управління процесами та потоками</li>
+                    <li>Управління пам'яттю</li>
+                    <li>Управління пристроями введення-виведення</li>
+                    <li>Обробка переривань</li>
+                    <li>Забезпечення системних викликів (API)</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h4>3. Файлова система</h4>
+                <p><strong>Файлова система</strong> — структура збереження даних на зовнішніх носіях і сукупність програм, які забезпечують роботу з цією структурою. Приклади: NTFS, FAT32, ext4, APFS.</p>
+            </div>
+
+            <div class="info-box">
+                <h4>4. Драйвери</h4>
+                <p><strong>Драйвери</strong> — програми, які керують роботою периферійних пристроїв комп'ютера. Кожен пристрій (принтер, відеокарта, мережевий адаптер) потребує свого драйвера для взаємодії з операційною системою.</p>
+            </div>
+
+            <div class="info-box">
+                <h4>5. Інтерфейс користувача</h4>
+                <p><strong>Інтерфейс користувача</strong> — сукупність засобів, які забезпечують обмін даними між користувачем і ОС. Може бути графічним (GUI) або текстовим (CLI).</p>
+            </div>
+        </section>
+
+        <!-- Властивості ОС -->
+        <section class="fade-in-section">
+            <h2>Основні властивості сучасних ОС</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">🖼️ Графічний інтерфейс</div>
+                    <p>Інтуїтивно зрозумілий візуальний інтерфейс з вікнами, іконками, меню, що дозволяє користувачам легко взаємодіяти з системою.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">⚡ Багатозадачність</div>
+                    <p>Здатність виконувати кілька програм одночасно, ефективно розподіляючи процесорний час між ними.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">🔢 Розрядність (32/64 біти)</div>
+                    <p>Визначає обсяг пам'яті, який може адресувати система, та швидкість обробки даних. 64-бітні системи можуть працювати з більшим об'ємом ОЗП.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">🔌 Plug and Play</div>
+                    <p>Автоматичне розпізнавання та налаштування додаткових пристроїв, що підключаються до комп'ютера без участі користувача.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">🌐 Мережеві можливості</div>
+                    <p>Розвинені засоби міжкомп'ютерного обміну даними, підтримка локальних та глобальних мереж.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">👥 Багатокористувацький режим</div>
+                    <p>Можливість установити індивідуальні значення параметрів роботи операційної системи для кожного користувача.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Класифікація ОС -->
+        <section class="fade-in-section">
+            <h2>Класифікація операційних систем</h2>
+
+            <h3>📋 Класифікація за різними критеріями</h3>
+
+            <div class="info-box">
+                <h4>За кількістю користувачів</h4>
+                <p><strong>Однокористувацькі:</strong> MS-DOS, ранні версії Windows</p>
+                <p><strong>Багатокористувацькі:</strong> UNIX, Linux, Windows Server — підтримують одночасну роботу кількох користувачів за різними терміналами.</p>
+            </div>
+
+            <div class="info-box">
+                <h4>За кількістю процесів</h4>
+                <p><strong>Однозадачні:</strong> MS-DOS — виконують тільки одну програму в окремий момент часу.</p>
+                <p><strong>Багатозадачні:</strong> Windows, macOS, Linux — підтримують паралельне виконання кількох програм.</p>
+            </div>
+
+            <div class="info-box">
+                <h4>За кількістю процесорів</h4>
+                <p><strong>Однопроцесорні:</strong> використовують один процесор.</p>
+                <p><strong>Багатопроцесорні:</strong> підтримують розподіл ресурсів кількох процесорів для вирішення задач.</p>
+            </div>
+
+            <div class="info-box">
+                <h4>За розрядністю</h4>
+                <p><strong>16-розрядні:</strong> MS-DOS, ранні Windows</p>
+                <p><strong>32-розрядні:</strong> Windows XP, Vista, 7 (32-bit версії)</p>
+                <p><strong>64-розрядні:</strong> сучасні ОС — забезпечують роботу з більшим обсягом пам'яті</p>
+                <p><em>Зверніть увагу: розрядність ОС не може перевищувати розрядність процесора</em></p>
+            </div>
+
+            <div class="info-box">
+                <h4>За типом інтерфейсу</h4>
+                <p><strong>Командні (текстові):</strong> MS-DOS, Linux Shell — спілкування через команди з клавіатури.</p>
+                <p><strong>Графічні (GUI):</strong> Windows, macOS — маніпуляція графічними об'єктами за допомогою миші.</p>
+            </div>
+
+            <div class="info-box">
+                <h4>За призначенням</h4>
+                <ul>
+                    <li><strong>Для робочих станцій:</strong> Windows, Linux Ubuntu, macOS</li>
+                    <li><strong>Для серверів:</strong> Windows Server, Linux Debian, FreeBSD</li>
+                    <li><strong>Для мобільних платформ:</strong> Android, iOS, Windows Mobile</li>
+                    <li><strong>Спеціалізовані:</strong> MikroTik, Cisco IOS — для мережевого обладнання</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h4>За способом побудови ядра</h4>
+                <p><strong>Монолітні:</strong> Windows, Linux — повний набір функцій включено в ядро. Ядро виконується в захищеному режимі.</p>
+                <p><strong>Мікроядерні:</strong> Minix, QNX — ядро містить мінімальний набір процедур для диспетчеризації процесів та управління апаратурою.</p>
+            </div>
+        </section>
+
+        <!-- Ядро і модулі -->
+        <section class="fade-in-section">
+            <h2>Ядро і допоміжні модулі ОС</h2>
+
+            <h3>🎯 Структуризація операційної системи</h3>
+
+            <p>Найбільш загальним підходом до структуризації операційної системи є розподіл усіх її модулів на дві групи:</p>
+
+            <div class="definition">
+                <strong>Ядро (Kernel)</strong> — модулі, що виконують основні функції ОС: управління процесами, пам'яттю, пристроями введення-виводу. Ядро складає серцевину ОС, без нього ОС є повністю непрацездатною.
+            </div>
+
+            <div class="info-box">
+                <h4>📌 Характеристики ядра:</h4>
+                <ul>
+                    <li><strong>Резидентність:</strong> постійно знаходиться в оперативній пам'яті для високої швидкодії</li>
+                    <li><strong>Захищений режим:</strong> виконується у привілейованому режимі (kernel mode)</li>
+                    <li><strong>Системні виклики:</strong> надає API для взаємодії з прикладними програмами</li>
+                    <li><strong>Критичні функції:</strong> перемикання контекстів, обробка переривань, управління сторінками пам'яті</li>
+                </ul>
+            </div>
+
+            <h3>🔧 Допоміжні модулі ОС</h3>
+
+            <p>Допоміжні модулі виконують корисні, але менш обов'язкові функції. Вони є <strong>транзитними</strong> — завантажуються в пам'ять тільки на час виконання своїх функцій.</p>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">🛠️ Утиліти</div>
+                    <p>Програми, що вирішують окремі завдання управління і супроводу комп'ютерної системи. Приклади: програми стиснення дисків, архівації даних, дефрагментації, очищення системи.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">💻 Системні програми</div>
+                    <p>Інструменти для розробки та обслуговування програмного забезпечення: текстові та графічні редактори, компілятори, компонувальники, відладчики.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">📚 Бібліотеки процедур</div>
+                    <p>Набори готових функцій різного призначення, що спрощують розробку додатків: математичні функції, функції введення-виведу, графічні бібліотеки.</p>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h4>⚙️ Режими роботи процесора</h4>
+                <p>Для забезпечення привілеїв ОС, апаратура комп'ютера підтримує два режими роботи:</p>
+                <ul>
+                    <li><strong>User mode (режим користувача):</strong> обмежений доступ до апаратури, виконуються прикладні програми</li>
+                    <li><strong>Kernel mode (режим ядра/супервізора):</strong> повний доступ до всіх ресурсів, виконується код ОС</li>
+                </ul>
+                <p>Це розділення забезпечує захист системи від помилок або зловмисних дій прикладних програм.</p>
+            </div>
+        </section>
+
+        <!-- Домашнє завдання -->
+        <div class="homework fade-in-section">
+            <h2>🎓 Домашнє завдання</h2>
+            <p style="text-align: center; margin-bottom: 40px; font-size: 1.1rem;">
+                Завдання складається з трьох рівнів складності. Максимальна оцінка — <strong class="highlight-text">12 балів</strong>.
+            </p>
+
+            <!-- Базовий рівень -->
+            <div class="level level-basic">
+                <div class="level-header">
+                    <h3 class="level-title">📗 Рівень 1: Базовий</h3>
+                    <span class="points">4 бали</span>
+                </div>
+                
+                <div class="task">
+                    <strong>Завдання 1.1:</strong> Дайте визначення поняття "операційна система". Перелічіть основні функції, які виконує ОС на комп'ютері.
+                </div>
+
+                <div class="task">
+                    <strong>Завдання 1.2:</strong> Опишіть еволюцію операційних систем по поколіннях ЕОМ (1-4 покоління). Які основні зміни відбувалися на кожному етапі?
+                </div>
+
+                <div class="task">
+                    <strong>Завдання 1.3:</strong> Перелічіть основні складові операційної системи (BIOS, ядро, файлова система, драйвери, інтерфейс) та коротко поясніть призначення кожної з них.
+                </div>
+
+                <div class="task">
+                    <strong>Завдання 1.4:</strong> Створіть таблицю з 5 версій Windows (на ваш вибір) із зазначенням року випуску та однієї ключової особливості кожної версії.
+                </div>
+            </div>
+
+            <!-- Середній рівень -->
+            <div class="level level-medium">
+                <div class="level-header">
+                    <h3 class="level-title">📙 Рівень 2: Середній</h3>
+                    <span class="points">4 бали</span>
+                </div>
+
+                <div class="task">
+                    <strong>Завдання 2.1:</strong> Порівняйте монолітну та мікроядерну архітектури операційних систем. Наведіть приклади ОС для кожного типу, опишіть переваги та недоліки кожного підходу.
+                </div>
+
+                <div class="task">
+                    <strong>Завдання 2.2:</strong> Проведіть класифікацію операційних систем за ЧОТИРМА різними критеріями (наприклад: за кількістю користувачів, за типом інтерфейсу, за призначенням, за розрядністю). Для кожного критерію наведіть конкретні приклади ОС.
+                </div>
+
+                <div class="task">
+                    <strong>Завдання 2.3:</strong> Поясніть різницю між резидентними та транзитними модулями операційної системи. Чому ядро ОС є резидентним? Які модулі відносяться до транзитних?
+                </div>
+
+                <div class="task">
+                    <strong>Завдання 2.4:</strong> Опишіть поняття "багатозадачність" в операційних системах. Як ОС розподіляє процесорний час між різними програмами? Наведіть приклади багатозадачних ОС.
+                </div>
+            </div>
+
+            <!-- Високий рівень -->
+            <div class="level level-advanced">
+                <div class="level-header">
+                    <h3 class="level-title">📕 Рівень 3: Високий</h3>
+                    <span class="points">4 бали</span>
+                </div>
+
+                <div class="task">
+                    <strong>Завдання 3.1:</strong> Проаналізуйте та порівняйте ТРИ сучасні операційні системи (наприклад: Windows 11, macOS, Ubuntu Linux) за такими критеріями:
+                    <ul style="margin-top: 10px;">
+                        <li>Архітектура ядра</li>
+                        <li>Підтримка апаратного забезпечення</li>
+                        <li>Файлові системи</li>
+                        <li>Безпека та права доступу</li>
+                        <li>Сфери застосування</li>
+                    </ul>
+                    Створіть порівняльну таблицю або структуровану аналітичну доповідь (мінімум 1 сторінка А4).
+                </div>
+
+                <div class="task">
+                    <strong>Завдання 3.2:</strong> Дослідіть та опишіть роль ядра операційної системи в забезпеченні безпеки та ізоляції процесів. Поясніть, що таке "kernel mode" та "user mode", чому ця різниця є критично важливою для стабільності та безпеки системи. Наведіть приклади ситуацій, коли порушення цієї ізоляції може призвести до серйозних проблем.
+                </div>
+
+                <div class="task">
+                    <strong>Завдання 3.3:</strong> Виконайте творче завдання: створіть інфографіку, презентацію або інтерактивну схему, яка відображає:
+                    <ul style="margin-top: 10px;">
+                        <li>Історичну лінію розвитку операційних систем (від ЕОМ 1 покоління до сучасних ОС)</li>
+                        <li>Класифікацію сучасних ОС з конкретними прикладами</li>
+                        <li>Взаємодію основних компонентів ОС (ядро, драйвери, файлова система, прикладні програми)</li>
+                    </ul>
+                </div>
+
+                <div class="task">
+                    <strong>Завдання 3.4 (бонусне):</strong> Проведіть міні-дослідження: встановіть віртуальну машину з будь-якою операційною системою Linux (наприклад, Ubuntu). Зробіть скріншоти процесу встановлення, опишіть основні кроки, визначте тип інтерфейсу, файлової системи. Порівняйте досвід використання з Windows. Напишіть короткий звіт (0.5-1 сторінка) з висновками.
+                </div>
+            </div>
+
+            <!-- Оцінювання -->
+            <div class="grading">
+                <h3>📊 Система оцінювання</h3>
+                <p style="text-align: center; margin-bottom: 20px;">
+                    Загальна оцінка складається з суми балів за виконані завдання. Максимальна кількість балів — 12.
+                </p>
+
+                <div class="grade-scale">
+                    <div class="grade-item">
+                        <div class="grade-number">12</div>
+                        <div class="grade-desc">Відмінно<br>Всі три рівні виконані на високому рівні</div>
+                    </div>
+                    <div class="grade-item">
+                        <div class="grade-number">10-11</div>
+                        <div class="grade-desc">Дуже добре<br>Два рівні повністю + частина третього</div>
+                    </div>
+                    <div class="grade-item">
+                        <div class="grade-number">8-9</div>
+                        <div class="grade-desc">Добре<br>Перші два рівні виконані якісно</div>
+                    </div>
+                    <div class="grade-item">
+                        <div class="grade-number">6-7</div>
+                        <div class="grade-desc">Задовільно<br>Базовий + частина середнього рівня</div>
+                    </div>
+                    <div class="grade-item">
+                        <div class="grade-number">4-5</div>
+                        <div class="grade-desc">Достатньо<br>Базовий рівень виконано</div>
+                    </div>
+                    <div class="grade-item">
+                        <div class="grade-number">1-3</div>
+                        <div class="grade-desc">Початковий<br>Часткове виконання базового рівня</div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px; padding: 20px; background: rgba(233, 69, 96, 0.1); border-radius: 10px; border-left: 4px solid var(--highlight);">
+                    <h4 style="color: var(--highlight); margin-bottom: 15px;">💡 Критерії оцінювання:</h4>
+                    <ul>
+                        <li><strong>Повнота відповіді:</strong> наскільки вичерпно розкрито тему</li>
+                        <li><strong>Точність інформації:</strong> правильність фактів та визначень</li>
+                        <li><strong>Структурованість:</strong> логічна побудова відповіді</li>
+                        <li><strong>Приклади:</strong> використання конкретних прикладів</li>
+                        <li><strong>Творчий підхід:</strong> оригінальність виконання завдань (особливо для рівня 3)</li>
+                        <li><strong>Оформлення:</strong> читабельність та акуратність роботи</li>
+                    </ul>
+                </div>
+
+                <div style="margin-top: 20px; text-align: center;">
+                    <p style="font-size: 1.1rem;"><strong>Термін здачі:</strong> <span class="highlight-text">7 днів з дати видачі завдання</span></p>
+                    <p style="margin-top: 10px;">Роботу можна виконати в електронному вигляді (документ Word/PDF) або письмово в зошиті</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Контрольні питання -->
+        <section class="fade-in-section">
+            <h2>❓ Контрольні питання для самоперевірки</h2>
+            <ol style="list-style: decimal; padding-left: 30px;">
+                <li style="margin-bottom: 15px; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                    Які ключові етапи розвитку операційних систем можна виділити в історії комп'ютерів?
+                </li>
+                <li style="margin-bottom: 15px; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                    Які основні категорії класифікації операційних систем існують, і що вони включають в себе?
+                </li>
+                <li style="margin-bottom: 15px; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                    Які функції виконує операційна система на комп'ютері, і чому вони важливі?
+                </li>
+                <li style="margin-bottom: 15px; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                    Які складові операційної системи відповідають за різні аспекти її функціонування?
+                </li>
+                <li style="margin-bottom: 15px; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                    Які властивості операційних систем впливають на їхню ефективність та надійність?
+                </li>
+                <li style="margin-bottom: 15px; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                    Як різниця між ядром операційної системи та допоміжними модулями впливає на їхню роль в системі?
+                </li>
+                <li style="margin-bottom: 15px; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                    Чому сучасні операційні системи використовують різні режими роботи процесора (user mode і kernel mode)?
+                </li>
+                <li style="margin-bottom: 15px; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                    У чому полягає різниця між багатозадачністю та багатокористувацьким режимом роботи?
+                </li>
+            </ol>
+        </section>
+
+
+    </div>
+
+    <script>
+        // Fade-in animation on scroll
+        const faders = document.querySelectorAll('.fade-in-section');
+
+        const appearOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -100px 0px"
+        };
+
+        const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('is-visible');
+                    appearOnScroll.unobserve(entry.target);
+                }
+            });
+        }, appearOptions);
+
+        faders.forEach(fader => {
+            appearOnScroll.observe(fader);
+        });
+
+        // Smooth scroll for internal links (if any added in future)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Console easter egg
+        console.log('%c🎓 Вітаємо у світі операційних систем!', 'color: #e94560; font-size: 20px; font-weight: bold;');
+        console.log('%cЯкщо ти бачиш це повідомлення, значить ти цікавишся технологіями! 🚀', 'color: #4ecdc4; font-size: 14px;');
+    </script>
+</body>
+</html>
